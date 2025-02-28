@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { addMonths, subMonths, format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth, isSameDay } from "date-fns";
 import { IoIosArrowBack,IoIosArrowForward } from "react-icons/io";
+import PostContainer from "./postContainer";
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -43,18 +44,9 @@ export default function Calendar() {
       {/* Calendar Days */}
       <div className="grid grid-cols-7 text-xs">
         {days.map((day, index) => (
-          <div
-            key={index}
-            onClick={() => setSelectedDate(day)}
-            className={`p-2 transition min-h-[80px] border-[1px] ${
-              !isSameMonth(day, monthStart) ? "text-gray-400" : ""
-            } ${
-              isSameDay(day, selectedDate) ? "bg-indigo-500 text-white" : "hover:bg-gray-200"
-            }`}
-          >
-            {format(day, "d")}
-          </div>
+          <PostContainer key={index} {...{day,monthStart,setSelectedDate, selectedDate}} />
         ))}
+        
       </div>
     </div>
   );
