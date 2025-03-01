@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface postComponentState {
     showPostForm: boolean,
-    mode: string
+    mode: string,
+    showCancelUI: boolean
 }
 interface payload {
     showPostForm:boolean,
@@ -11,7 +12,8 @@ interface payload {
 
 const initialState: postComponentState = {
     showPostForm:false,
-    mode:'create'
+    mode:'create',
+    showCancelUI: false
 }
 
 const postComponentSlice = createSlice({
@@ -22,9 +24,12 @@ const postComponentSlice = createSlice({
             state.showPostForm = action.payload.showPostForm
             state.mode = action.payload.mode
         },
-        
+        showCancelUI: (state) =>{
+            state.showPostForm = false
+        },
+
     }
 });
 
-export const {updateMode} = postComponentSlice.actions
+export const {updateMode, showCancelUI} = postComponentSlice.actions
 export default postComponentSlice.reducer;

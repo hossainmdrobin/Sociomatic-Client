@@ -1,30 +1,32 @@
 import { RootState } from '@/redux/store'
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import PostFormHeader from './PostFormHeader'
+import PostFormHeader from './CreatePostHeader'
+import FormHeader from './PostForm/FormHeader'
+import PostForm from './PostForm/PostForm'
+import ViewMenu from './view/ViewMenu'
+import PCView from './view/PCView'
 
 export default function CreatePost() {
     const show = useSelector((state: RootState) => state.post_component.showPostForm)
+    const [isPC, setIsPC] = useState(true)
     return (
-        <div className={`fixed top-0 left-0 bg-white rounded-end-xl h-screen bg-gray-200 w-[calc(theme(width.screen)-200px)] shadow-xl ${show ? "" : 'hidden'}`}>
-            <div className='bg-white'>
+        <div className={`fixed top-0 left-0 rounded-end-xl h-screen bg-gray-100 w-[calc(theme(width.screen)-100px)] shadow-xl ${show ? "" : 'hidden'}`}>
+            <div className=''>
                 <div className='w-full'>
                     <PostFormHeader />
                 </div>
-                <div className='flex'>
+                <div className='flex '>
                     <div className='w-1/2 flex flex-col items-center w-1/2 overflow-y-scroll'>
-                        <div>
-                            <span>pc</span>
-                            <span>mobile</span>
-                        </div>
-                        <div>
-                            Views Component
-                        </div>
+                        <ViewMenu {...{isPC,setIsPC}}/>
+                        <PCView {...{isPC}} />
                     </div>
-                    <div className='w-1/2 overflow-y-scroll'>
-
+                    <div className='w-1/2 overflow-y-scroll h-[500px] p-3'>
+                        <FormHeader />
+                        <PostForm />
                     </div>
                 </div>
+
             </div>
         </div>
     )

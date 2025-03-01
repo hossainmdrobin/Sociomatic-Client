@@ -15,9 +15,9 @@ export default function Calendar() {
   const days = eachDayOfInterval({ start: startDate, end: endDate });
 
   return (
-    <div className="w-full shadow-xl p-1 rounded-lg shadow-md bg-white">
+    <div className="w-full shadow-xl p-2 rounded-lg shadow-md bg-white">
       {/* Header */}
-      <div className="w-[200px] flex justify-between items-center ml-2 mb-2">
+      <div className="w-[200px] flex justify-between items-center mt-4 ml-2 mb-2">
         <button
           onClick={() => setCurrentDate(subMonths(currentDate, 1))}
           className="p-1 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
