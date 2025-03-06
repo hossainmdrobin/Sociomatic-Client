@@ -11,23 +11,30 @@ export default function PostForm() {
   const {
     register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues
   } = useForm()
+
+  const onSubmit = (data:any) => console.log(data)
+  console.log(getValues())
+
+
   return (
     <div className=''>
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         {/* Post content */}
-        <PostContent {...{register}}/>
+        <PostContent {...{ register }} />
 
         {/* post planning */}
-        <PostPlanning {...{register}}/>
+        <PostPlanning {...{ register }} />
 
         {/* Boost Budget */}
-        <BoostBudget {...{register}}/>
+        <BoostBudget {...{ register }} />
 
         {/* Post Labels  */}
-        <Label {...{register}}/>
+        <Label {...{ register }} />
 
         {/* Post Notes  */}
-        <PostNotes {...{register}}/>
+        <PostNotes {...{ register }} />
+        <input {...register('mello')} />
+        <button>Submit</button>
       </form>
     </div>
   )

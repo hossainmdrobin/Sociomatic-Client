@@ -33,7 +33,7 @@ export default function Label({ register }: { register: UseFormRegister<FieldVal
                         onInputChange={(_, newInputValue: string) => setInputValue(newInputValue)}
                         renderTags={(value: string[], getTagProps) =>
                             value.map((option: string, index: number) => (
-                                <Chip key={option} label={option} {...getTagProps({ index })} />
+                                <Chip label={option} {...getTagProps({ index })} />
                             ))
                         }
                         renderInput={(params) => (
