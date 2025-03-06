@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { BsEmojiSmile } from "react-icons/bs";
 import { FaHashtag, FaLink, FaChevronDown } from "react-icons/fa";
 
 
-export default function PostContent() {
+export default function PostContent({register}:{register:UseFormRegister<FieldValues>}) {
+    console.log(register)
     const [open,setOpen] = useState(true)
     return (
         <fieldset className='mt-4 shadow p-2 rounded-lg bg-white'>
@@ -18,7 +20,7 @@ export default function PostContent() {
                     <span>Translate Text</span>
                 </div>
                 <div className='border rounded-xl p-2 group'>
-                    <textarea className='w-full p-1 focus:outline-none' rows={5} name="" id="text" placeholder='Type here'></textarea>
+                    <textarea {...register('postText',)} className='w-full p-1 focus:outline-none' rows={5} name="" id="text" placeholder='Type here'></textarea>
                     <div className='flex items-center'>
                         <span className='mx-2 px-2 py-1 rounded bg-gray-200 hover:bg-gray-400 h-7 flex justify-center items-center'>AI content</span>
                         <span className='mx-2 px-2 py-1 rounded bg-gray-200 hover:bg-gray-400 h-7 flex justify-center items-center'><BsEmojiSmile /> </span>

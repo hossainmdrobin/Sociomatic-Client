@@ -4,26 +4,30 @@ import PostPlanning from './PostPlanning'
 import BoostBudget from './BoostBudget'
 import Label from './Label'
 import PostNotes from './PostNotes'
+import { useForm } from 'react-hook-form'
 
 
 export default function PostForm() {
+  const {
+    register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues
+  } = useForm()
   return (
     <div className=''>
       <form action="">
         {/* Post content */}
-        <PostContent />
-        
+        <PostContent {...{register}}/>
+
         {/* post planning */}
-        <PostPlanning />
+        <PostPlanning {...{register}}/>
 
         {/* Boost Budget */}
-        <BoostBudget />
+        <BoostBudget {...{register}}/>
 
         {/* Post Labels  */}
-        <Label />
+        <Label {...{register}}/>
 
         {/* Post Notes  */}
-        <PostNotes />
+        <PostNotes {...{register}}/>
       </form>
     </div>
   )
