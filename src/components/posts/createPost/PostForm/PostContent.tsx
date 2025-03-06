@@ -1,3 +1,4 @@
+import { Switch } from '@mui/material';
 import React, { useState } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { BsEmojiSmile } from "react-icons/bs";
@@ -5,7 +6,6 @@ import { FaHashtag, FaLink, FaChevronDown } from "react-icons/fa";
 
 
 export default function PostContent({register}:{register:UseFormRegister<FieldValues>}) {
-    console.log(register)
     const [open,setOpen] = useState(true)
     return (
         <fieldset className='mt-4 shadow p-2 rounded-lg bg-white'>
@@ -30,7 +30,7 @@ export default function PostContent({register}:{register:UseFormRegister<FieldVa
                 </div>
                 <div className='flex justify-between items-center'>
                     <div className='my-2'>Add first comment to the post <span className='text-sm p-1 bg-gray-200 rounded '>new</span></div>
-                    <button>button</button>
+                    <Switch />
                 </div>
             </div>
         </fieldset>
