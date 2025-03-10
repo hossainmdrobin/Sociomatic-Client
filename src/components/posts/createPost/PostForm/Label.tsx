@@ -4,7 +4,7 @@ import { FieldValues, UseFormRegister } from 'react-hook-form'
 import { FaChevronDown } from 'react-icons/fa'
 import { IoAddCircleOutline } from 'react-icons/io5'
 
-export default function Label({ register }: { register: UseFormRegister<FieldValues> }) {
+export default function Label() {
     const [open, setOpen] = useState(true)
     const [skills, setSkills] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState<string>("");

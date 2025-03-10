@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { FaChevronDown } from 'react-icons/fa'
 
-export default function PostNotes({register}:{register:UseFormRegister<FieldValues>}) {
+export default function PostNotes() {
     const [open, setOpen] = useState(true)
+    const {register} = useFormContext()
 
     return (
         <fieldset className='mt-4 shadow p-2 rounded-lg bg-white transition'>
@@ -12,7 +13,7 @@ export default function PostNotes({register}:{register:UseFormRegister<FieldValu
                 <FaChevronDown className='mr-2' />
             </div>
             <div className={`${open ? "" : "hidden"}`}>
-                <textarea className='w-full focus:outline-none mr-2 p-1 bg-gray-200 rounded' name="" id="" />
+                <textarea {...register('note')} className='w-full focus:outline-none mr-2 p-1 bg-gray-200 rounded' />
             </div>
 
         </fieldset>

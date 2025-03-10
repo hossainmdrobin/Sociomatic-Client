@@ -9,7 +9,7 @@ export default function PCView({isPC}:{isPC:boolean}) {
   return (
     <div className='bg-white max-h-[400px] w-4/5 p-3 rounded-lg shadow-lg'>
       <div className='flex'>
-        <Image src={''} alt='profile photo' width={20} height={20} />
+        {/* <Image src={''} alt='profile photo' width={20} height={20} /> */}
         <div>
           <div>Md Robin Hossain</div>
           <div className='flex items-center'>

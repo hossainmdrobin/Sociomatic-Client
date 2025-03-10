@@ -4,38 +4,40 @@ import PostPlanning from './PostPlanning'
 import BoostBudget from './BoostBudget'
 import Label from './Label'
 import PostNotes from './PostNotes'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
+import { Button } from '@mui/material'
 
 
 export default function PostForm() {
-  const {
-    register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues
-  } = useForm()
 
-  const onSubmit = (data:any) => console.log(data)
-  console.log(getValues())
+  const methods = useForm<FormData>();
 
-
+  const onSubmit = (data: FormData) => {
+    console.log("Form Submitted:", data);
+  };
+  
   return (
     <div className=''>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Post content */}
-        <PostContent {...{ register }} />
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          {/* Post content */}
+          <PostContent />
 
-        {/* post planning */}
-        <PostPlanning {...{ register }} />
+          {/* post planning */}
+          <PostPlanning />
 
-        {/* Boost Budget */}
-        <BoostBudget {...{ register }} />
+          {/* Boost Budget */}
+          <BoostBudget />
 
-        {/* Post Labels  */}
-        <Label {...{ register }} />
+          {/* Post Labels  */}
+          <Label  />
 
-        {/* Post Notes  */}
-        <PostNotes {...{ register }} />
-        <input {...register('mello')} />
-        <button>Submit</button>
-      </form>
+          {/* Post Notes  */}
+          <PostNotes />
+          <Button type='submit'>Submit</Button>
+        </form>
+      </FormProvider>
+
     </div>
   )
 }

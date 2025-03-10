@@ -1,11 +1,13 @@
+"use client"
 import { Switch } from '@mui/material';
 import React, { useState } from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { BsEmojiSmile } from "react-icons/bs";
 import { FaHashtag, FaLink, FaChevronDown } from "react-icons/fa";
 
 
-export default function PostContent({register}:{register:UseFormRegister<FieldValues>}) {
+export default function PostContent() {
+    const { register } = useFormContext();
     const [open,setOpen] = useState(true)
     const [addComment, setAddComment] = useState(false)
     return (
@@ -25,9 +27,8 @@ export default function PostContent({register}:{register:UseFormRegister<FieldVa
                     {...register('postText')} 
                     className='w-full p-1 focus:outline-none' 
                     rows={5} 
-                    name="" 
-                    id="text" 
                     placeholder='Type here' />
+                
 
                     <div className='flex items-center'>
                         <span className='mx-2 px-2 py-1 rounded bg-gray-200 hover:bg-gray-400 h-7 flex justify-center items-center'>AI content</span>
@@ -47,8 +48,6 @@ export default function PostContent({register}:{register:UseFormRegister<FieldVa
                     {...register('firstComment')} 
                     className='w-full p-1 focus:outline-none' 
                     rows={5} 
-                    name="" 
-                    id="text" 
                     placeholder='Type here' />
                 </div>
             </div>
