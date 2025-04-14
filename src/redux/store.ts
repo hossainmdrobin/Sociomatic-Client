@@ -8,19 +8,23 @@ import apiSlice  from './api/apiSlice';
 
 const rootReducer = combineReducers({
   counter:counterReducer,
+  post_component: postComponentReducer,
 })
 
 const persistConfig:PersistConfig<ReturnType<typeof rootReducer>> = {
   key:'root',
   version: 1,
   storage,
-  whitelist:[""]
+  whitelist:[]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-  reducer:persistedReducer,
+  reducer:{
+    persistedReducer,
+    [apiSlice.reducerPath]:apiSlice.reducer
+  },
   middleware:(getDefaultMiddleware)=>
     getDefaultMiddleware({
       serializableCheck:false,
@@ -40,3 +44,4 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export const persistor = persistStore(store)
