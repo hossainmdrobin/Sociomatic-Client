@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { TiTick } from "react-icons/ti";
 
 
-const OtpInput = () => {
+const OtpInput = ({email}:{email:string}) => {
   const [otp, setOtp] = useState(Array(6).fill(''));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -34,6 +34,8 @@ const OtpInput = () => {
       inputsRef.current[index + 1]?.focus();
     }
   };
+
+  // Calling email verification API
 
   return (<>
     <div className='h-screen w-screen fixed bg-black opacity-30'></div>
