@@ -12,13 +12,16 @@ export default function Signup() {
     formState: { errors },
   } = useForm<{ name: string; email: string; password: string }>();
 
-  const onSubmit = (data:{name:string,email:string,password:string}) => {
-    console.log("Form Data:", data);
+  const onSubmit =async (data:{name:string,email:string,password:string}) => {
+    const response = await fetch("https://example.com/api/signup", {
+      method: "POST", 
+      body: JSON.stringify(data)
+    });
   };
 
   return (
     <>
-    <OtpInput />
+    {<OtpInput />}
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
         <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
