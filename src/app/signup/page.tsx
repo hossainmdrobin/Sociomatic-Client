@@ -4,8 +4,12 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaXTwitter } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import OtpInput from "@/components/Signup/OtpInput";
+import { useState } from "react";
 
 export default function Signup() {
+  const [loading,setLoading] = useState(false);
+  const [data, setData] = useState<Response | null>(null);
+  const [error,setError] = useState({name:"",email:"",password:""});
   const {
     register,
     handleSubmit,
@@ -13,15 +17,23 @@ export default function Signup() {
   } = useForm<{ name: string; email: string; password: string }>();
 
   const onSubmit =async (data:{name:string,email:string,password:string}) => {
-    const response = await fetch("https://example.com/api/signup", {
+    setLoading(true);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL_DEV}/auth/signup`, {
       method: "POST", 
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json",},
     });
+    if (response.ok) {
+      setData(response);
+    }
+    else {
+      console.log("Error signing up user");
+    }
   };
 
   return (
     <>
-    {<OtpInput />}
+    {data && <OtpInput />}
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
         <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
