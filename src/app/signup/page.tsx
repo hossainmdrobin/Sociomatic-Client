@@ -3,19 +3,22 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaXTwitter } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
+import OtpInput from "@/components/Signup/OtpInput";
 
 export default function Signup() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<{ name: string; email: string; password: string }>();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data:{name:string,email:string,password:string}) => {
     console.log("Form Data:", data);
   };
 
   return (
+    <>
+    <OtpInput />
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
         <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
@@ -68,5 +71,6 @@ export default function Signup() {
         </div>
       </div>
     </div>
+    </>
   );
 }
