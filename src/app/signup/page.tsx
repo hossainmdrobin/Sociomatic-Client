@@ -5,7 +5,7 @@ import { FaFacebook, FaXTwitter } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import OtpInput from "@/components/Signup/OtpInput";
 import { useState } from "react";
-
+import Loader from "@/components/partials/Loader";
 export default function Signup() {
   const [loading,setLoading] = useState(false);
   const [data, setData] = useState<Response | null>(null);
@@ -34,6 +34,7 @@ export default function Signup() {
   return (
     <>
     {data && <OtpInput {...{email:"sss"}} />}
+    {!loading && <Loader />}
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
         <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
