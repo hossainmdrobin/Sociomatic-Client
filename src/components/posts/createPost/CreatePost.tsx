@@ -8,7 +8,8 @@ import ViewMenu from './view/ViewMenu'
 import PCView from './view/PCView'
 
 export default function CreatePost() {
-    const show = useSelector((state: RootState) => state.post_component.showPostForm)
+    const show = useSelector((state: RootState) => state.persistedReducer.post_component.showPostForm)
+    console.log("show", show)
     const [isPC, setIsPC] = useState(true)
     return (
         <div className={`fixed top-0 left-0 rounded-end-xl h-screen bg-gray-100 w-[calc(theme(width.screen)-100px)] shadow-xl ${show ? "" : 'hidden'}`}>
