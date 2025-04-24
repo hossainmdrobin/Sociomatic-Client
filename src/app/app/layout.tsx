@@ -4,6 +4,7 @@ import "./../globals.css";
 import ReduxProvider from "@/redux/provider";
 import CreatePost from "@/components/posts/createPost/CreatePost";
 import Topbar from "@/components/posts/Topbar/Topbar";
+import SocialLoginButtons from "@/components/partials/SocialLogin/SocialLoginButtons";
 
 
 export default function AppLayout({
@@ -22,6 +23,8 @@ export default function AppLayout({
                 </div>
                 {children}
                 <CreatePost />
+                <SocialLoginButtons />
+
             </section>
         </ReduxProvider>
     );
