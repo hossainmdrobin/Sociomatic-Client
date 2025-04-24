@@ -3,6 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { HomeIcon } from 'lucide-react';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -50,13 +51,13 @@ export default function VerticalTabs() {
     >
       <Tabs
         orientation="vertical"
-        variant="scrollable"
+        // variant="scrollable"
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
+        sx={{ borderRight: 1, borderColor: 'divider', justifyContent:"flex-start" }}
       >
-        <Tab label="Item One" {...a11yProps(0)} />
+        <Tab icon={<HomeIcon />} iconPosition='start' label="ALL" {...a11yProps(0)} />
         <Tab label="Item Two" {...a11yProps(1)} />
         <Tab label="Item Three" {...a11yProps(2)} />
         <Tab label="Item Four" {...a11yProps(3)} />
