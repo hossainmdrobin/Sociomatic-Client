@@ -6,9 +6,6 @@ import { MdOutlineFeaturedPlayList } from "react-icons/md";
 export default function postCalendar() {
     return (
         <div className='ml-[40px] bg-gray-50'>
-            <div >
-                <Topbar />
-            </div>
             <div className='my-2 ml-4 text-sm flex items-center'>
                 <div className='mr-3 p-2 bg-gray-100 hover:bg-gray-200 transition rounded cursor-pointer'>
                     <MdOutlineFeaturedPlayList />

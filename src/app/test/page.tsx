@@ -1,6 +1,6 @@
 'use client'
 import PostContent from "@/components/posts/createPost/PostForm/PostContent"
-import Common from "@/components/test/common"
+import Common from "@/components/test/page"
 import React, { useEffect } from "react"
 import { useForm, FormProvider, useFormContext } from "react-hook-form"
 

@@ -3,6 +3,7 @@ import AppSideBar from "@/components/partials/AppSidebar/AppSideBar";
 import "./../globals.css";
 import ReduxProvider from "@/redux/provider";
 import CreatePost from "@/components/posts/createPost/CreatePost";
+import Topbar from "@/components/posts/Topbar/Topbar";
 
 
 export default function AppLayout({
@@ -14,6 +15,11 @@ export default function AppLayout({
         <ReduxProvider>
             <section>
                 <AppSideBar />
+                <div className='ml-[40px] bg-gray-50'>
+                    <div >
+                        <Topbar />
+                    </div>
+                </div>
                 {children}
                 <CreatePost />
             </section>
