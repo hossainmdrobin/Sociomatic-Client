@@ -3,12 +3,16 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { HomeIcon } from 'lucide-react';
+import { FaFolder, FaShareAlt, FaLinkedin, FaFacebook, FaPinterest } from "react-icons/fa";
+import { IoMdListBox } from "react-icons/io";
+import AllProfiles from './allProfiles';
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
+  sx?: object; // Add the sx property to the interface
 }
 
 function TabPanel(props: TabPanelProps) {
@@ -23,7 +27,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{}}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -45,31 +49,43 @@ export default function VerticalTabs() {
     setValue(newValue);
   };
 
+  const TabProps = [
+    { label: "ALL", icon: <IoMdListBox /> },
+    { label: "Profiles", icon: <FaShareAlt /> },
+    { label: "Profile Groups", icon: <FaFolder /> },
+    { label: "LinkedIn", icon: <FaLinkedin /> },
+    { label: "Facebook", icon: <FaFacebook /> },
+    { label: "Pinterest", icon: <FaPinterest /> },
+  ]
+
   return (
-    <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
+    <Box 
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 450, width: "100%" }}
     >
       <Tabs
         orientation="vertical"
-        // variant="scrollable"
+        variant="scrollable"
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider', justifyContent:"flex-start" }}
+        sx={{ borderRight: 1, borderColor: 'divider', justifyContent: "flex-start",minWidth:"200px"}}
       >
-        <Tab icon={<HomeIcon />} iconPosition='start' label="ALL" {...a11yProps(0)} />
-        <Tab label="Item Two" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
-        <Tab label="Item Seven" {...a11yProps(6)} />
+        {TabProps.map((tab, index) => (
+          <Tab
+            sx={{ justifyContent: "flex-start", width: "100%", height: 44, minHeight: 32 }}
+            key={index}
+            icon={tab.icon || undefined}
+            iconPosition='start'
+            label={tab.label}
+            {...a11yProps(index)}
+          />
+        ))}
       </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
+      <TabPanel value={value} index={0} sx={{width: "400px",overFlowY:'auto',minWidth:"400px", backgroundColor: "red",boxShadow: "0px"}}>
+        <AllProfiles />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
