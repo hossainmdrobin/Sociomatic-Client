@@ -8,209 +8,213 @@ import { Button } from '@mui/base/Button';
 import { unstable_useModal as useModal } from '@mui/base/unstable_useModal';
 import Fade from '@mui/material/Fade';
 import SingleSocialButton from './SingleSocialButton';
+import Grid from '@mui/material/Grid';
+
 
 const socialButtons = [
-    { name: 'Google', icon: '/images/social/google.svg' },
-    { name: 'Facebook', icon: '/images/social/facebook.svg' },
-    { name: 'Twitter', icon: '/images/social/twitter.svg' },
-    { name: 'LinkedIn', icon: '/images/social/linkedin.svg' },
+    { name: 'Facebook', icon: '/media/icons/facebook.png', feature: "Bussiness Page" },
+    { name: 'Instragram', icon: '/media/icons/instagram.png', feature: "Bussiness or Creator" },
+    { name: 'Tiktok', icon: '/media/icons/tiktok.png', feature: "Bussiness or Creator" },
+    { name: 'LinkedIn', icon: '/media/icons/linkedin.png', feature: "Page or Profile" },
+    { name: 'X', icon: '/media/icons/x.png', feature: "Profile" },
+    { name: 'Pinterest', icon: '/media/icons/pinterest.png', feature: "Bussiness or profile" },
 ]
 
 export default function SocialLoginButtons() {
-  const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+    const [open, setOpen] = React.useState(true);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-  return (
-    <div>
-      <TriggerButton onClick={handleOpen}>Open modal</TriggerButton>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-      >
-        <Fade in={open}>
-          <ModalContent sx={style}>
-            <h2 id="transition-modal-title" className="modal-title">
-              Text in a modal
-            </h2>
-            <span id="transition-modal-description" className="modal-description">
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </span>
-            <SingleSocialButton />
-          </ModalContent>
-        </Fade>
-      </Modal>
-    </div>
-  );
+    return (
+        <div>
+            <TriggerButton onClick={handleOpen}>Open modal</TriggerButton>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+            >
+                <Fade in={open}>
+                    <ModalContent sx={style}>
+                        <div className='grid grid-cols-3 gap-4'>
+                            {socialButtons.map((button, index) => (
+                                <SingleSocialButton {...button}/>
+                            ))}
+
+                        </div>
+
+                    </ModalContent>
+                </Fade>
+            </Modal>
+        </div>
+    );
 }
 
 interface ModalProps {
-  children: React.ReactElement<any>;
-  closeAfterTransition?: boolean;
-  container?: Element | (() => Element | null) | null;
-  disableAutoFocus?: boolean;
-  disableEnforceFocus?: boolean;
-  disableEscapeKeyDown?: boolean;
-  disablePortal?: boolean;
-  disableRestoreFocus?: boolean;
-  disableScrollLock?: boolean;
-  hideBackdrop?: boolean;
-  keepMounted?: boolean;
-  onClose?: (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => void;
-  onTransitionEnter?: () => void;
-  onTransitionExited?: () => void;
-  open: boolean;
+    children: React.ReactElement<any>;
+    closeAfterTransition?: boolean;
+    container?: Element | (() => Element | null) | null;
+    disableAutoFocus?: boolean;
+    disableEnforceFocus?: boolean;
+    disableEscapeKeyDown?: boolean;
+    disablePortal?: boolean;
+    disableRestoreFocus?: boolean;
+    disableScrollLock?: boolean;
+    hideBackdrop?: boolean;
+    keepMounted?: boolean;
+    onClose?: (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => void;
+    onTransitionEnter?: () => void;
+    onTransitionExited?: () => void;
+    open: boolean;
 }
 
 const Modal = React.forwardRef(function Modal(
-  props: ModalProps,
-  forwardedRef: React.ForwardedRef<HTMLElement>,
+    props: ModalProps,
+    forwardedRef: React.ForwardedRef<HTMLElement>,
 ) {
-  const {
-    children,
-    closeAfterTransition = false,
-    container,
-    disableAutoFocus = false,
-    disableEnforceFocus = false,
-    disableEscapeKeyDown = false,
-    disablePortal = false,
-    disableRestoreFocus = false,
-    disableScrollLock = false,
-    hideBackdrop = false,
-    keepMounted = false,
-    onClose,
-    open,
-    onTransitionEnter,
-    onTransitionExited,
-    ...other
-  } = props;
+    const {
+        children,
+        closeAfterTransition = false,
+        container,
+        disableAutoFocus = false,
+        disableEnforceFocus = false,
+        disableEscapeKeyDown = false,
+        disablePortal = false,
+        disableRestoreFocus = false,
+        disableScrollLock = false,
+        hideBackdrop = false,
+        keepMounted = false,
+        onClose,
+        open,
+        onTransitionEnter,
+        onTransitionExited,
+        ...other
+    } = props;
 
-  const propsWithDefaults = {
-    ...props,
-    closeAfterTransition,
-    disableAutoFocus,
-    disableEnforceFocus,
-    disableEscapeKeyDown,
-    disablePortal,
-    disableRestoreFocus,
-    disableScrollLock,
-    hideBackdrop,
-    keepMounted,
-  };
+    const propsWithDefaults = {
+        ...props,
+        closeAfterTransition,
+        disableAutoFocus,
+        disableEnforceFocus,
+        disableEscapeKeyDown,
+        disablePortal,
+        disableRestoreFocus,
+        disableScrollLock,
+        hideBackdrop,
+        keepMounted,
+    };
 
-  const {
-    getRootProps,
-    getBackdropProps,
-    getTransitionProps,
-    portalRef,
-    isTopModal,
-    exited,
-    hasTransition,
-  } = useModal({
-    ...propsWithDefaults,
-    rootRef: forwardedRef,
-  });
+    const {
+        getRootProps,
+        getBackdropProps,
+        getTransitionProps,
+        portalRef,
+        isTopModal,
+        exited,
+        hasTransition,
+    } = useModal({
+        ...propsWithDefaults,
+        rootRef: forwardedRef,
+    });
 
-  const classes = {
-    hidden: !open && exited,
-  };
+    const classes = {
+        hidden: !open && exited,
+    };
 
-  const childProps: {
-    onEnter?: () => void;
-    onExited?: () => void;
-    tabIndex?: string;
-  } = {};
-  if (children.props.tabIndex === undefined) {
-    childProps.tabIndex = '-1';
-  }
+    const childProps: {
+        onEnter?: () => void;
+        onExited?: () => void;
+        tabIndex?: string;
+    } = {};
+    if (children.props.tabIndex === undefined) {
+        childProps.tabIndex = '-1';
+    }
 
-  // It's a Transition like component
-  if (hasTransition) {
-    const { onEnter, onExited } = getTransitionProps();
-    childProps.onEnter = onEnter;
-    childProps.onExited = onExited;
-  }
+    // It's a Transition like component
+    if (hasTransition) {
+        const { onEnter, onExited } = getTransitionProps();
+        childProps.onEnter = onEnter;
+        childProps.onExited = onExited;
+    }
 
-  const rootProps = {
-    ...other,
-    className: clsx(classes),
-    ...getRootProps(other),
-  };
+    const rootProps = {
+        ...other,
+        className: clsx(classes),
+        ...getRootProps(other),
+    };
 
-  const backdropProps = {
-    open,
-    ...getBackdropProps(),
-  };
+    const backdropProps = {
+        open,
+        ...getBackdropProps(),
+    };
 
-  if (!keepMounted && !open && (!hasTransition || exited)) {
-    return null;
-  }
+    if (!keepMounted && !open && (!hasTransition || exited)) {
+        return null;
+    }
 
-  return (
-    <Portal ref={portalRef} container={container} disablePortal={disablePortal}>
-      <CustomModalRoot {...rootProps}>
-        {!hideBackdrop ? <CustomModalBackdrop {...backdropProps} /> : null}
-        <FocusTrap
-          disableEnforceFocus={disableEnforceFocus}
-          disableAutoFocus={disableAutoFocus}
-          disableRestoreFocus={disableRestoreFocus}
-          isEnabled={isTopModal}
-          open={open}
-        >
-          {React.cloneElement(children, childProps)}
-        </FocusTrap>
-      </CustomModalRoot>
-    </Portal>
-  );
+    return (
+        <Portal ref={portalRef} container={container} disablePortal={disablePortal}>
+            <CustomModalRoot {...rootProps}>
+                {!hideBackdrop ? <CustomModalBackdrop {...backdropProps} /> : null}
+                <FocusTrap
+                    disableEnforceFocus={disableEnforceFocus}
+                    disableAutoFocus={disableAutoFocus}
+                    disableRestoreFocus={disableRestoreFocus}
+                    isEnabled={isTopModal}
+                    open={open}
+                >
+                    {React.cloneElement(children, childProps)}
+                </FocusTrap>
+            </CustomModalRoot>
+        </Portal>
+    );
 });
 
 const Backdrop = React.forwardRef<HTMLDivElement, { open?: boolean }>(
-  (props, ref) => {
-    const { open, ...other } = props;
-    return (
-      <Fade in={open}>
-        <div ref={ref} {...other} />
-      </Fade>
-    );
-  },
+    (props, ref) => {
+        const { open, ...other } = props;
+        return (
+            <Fade in={open}>
+                <div ref={ref} {...other} />
+            </Fade>
+        );
+    },
 );
 
 const blue = {
-  200: '#99CCFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0066CC',
+    200: '#99CCFF',
+    300: '#66B2FF',
+    400: '#3399FF',
+    500: '#007FFF',
+    600: '#0072E5',
+    700: '#0066CC',
 };
 
 const grey = {
-  50: '#F3F6F9',
-  100: '#E5EAF2',
-  200: '#DAE2ED',
-  300: '#C7D0DD',
-  400: '#B0B8C4',
-  500: '#9DA8B7',
-  600: '#6B7A90',
-  700: '#434D5B',
-  800: '#303740',
-  900: '#1C2025',
+    50: '#F3F6F9',
+    100: '#E5EAF2',
+    200: '#DAE2ED',
+    300: '#C7D0DD',
+    400: '#B0B8C4',
+    500: '#9DA8B7',
+    600: '#6B7A90',
+    700: '#434D5B',
+    800: '#303740',
+    900: '#1C2025',
 };
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  height:550
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    height: 550
 };
 
 const ModalContent = styled('div')(
-  ({ theme }) => css`
+    ({ theme }) => css`
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 500;
     text-align: start;
@@ -261,7 +265,7 @@ const CustomModalBackdrop = styled(Backdrop)`
 `;
 
 const TriggerButton = styled(Button)(
-  ({ theme }) => css`
+    ({ theme }) => css`
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 600;
     font-size: 0.875rem;
