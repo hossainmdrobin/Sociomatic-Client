@@ -9,17 +9,16 @@ import { unstable_useModal as useModal } from '@mui/base/unstable_useModal';
 import Fade from '@mui/material/Fade';
 import { RootState } from '@/redux/store'
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleAddProfile } from '@/redux/slices/layoutSlices/layoutSlice';
+import { closeFacebookPop } from '@/redux/slices/layoutSlices/layoutSlice';
 
 
 export default function SocialLoginModal() {
-    const open = useSelector((state: RootState) => state.persistedReducer.appTopBar.addProfileOpen);
-    const dispatch = useDispatch()
-    const handleClose = () => dispatch(toggleAddProfile());
+    const open = useSelector((state: RootState) => state.persistedReducer.appTopBar.facebookPopOpen);
+    const dispatch = useDispatch();
+    const handleClose = () => dispatch(closeFacebookPop());
 
     return (
         <div>
-            {/* <TriggerButton onClick={handleOpen}>Open modal</TriggerButton> */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -29,11 +28,9 @@ export default function SocialLoginModal() {
             >
                 <Fade in={open}>
                     <ModalContent sx={style}>
-                        <div className='grid grid-cols-3 gap-4'>
+                        <div className=''>
                             FaceBook Login Button
-
                         </div>
-
                     </ModalContent>
                 </Fade>
             </Modal>
