@@ -4,7 +4,6 @@ interface topBarState {
   addProfileOpen: boolean,
   facebookPopOpen: boolean,
   instagramPopOpen: boolean,
-  twitterPopOpen: boolean,
   tikTokPopOpen: boolean,
   linkedInPopOpen: boolean,
   pinterestPopOpen: boolean,
@@ -17,7 +16,6 @@ const initialState: topBarState = {
   // social login popups
   facebookPopOpen: false,
   instagramPopOpen: false,
-  twitterPopOpen: false,
   tikTokPopOpen: false,
   linkedInPopOpen: false,
   pinterestPopOpen: false,
@@ -31,7 +29,34 @@ const topBarSlice = createSlice({
     toggleAddProfile: (state) => {
       state.addProfileOpen = !state.addProfileOpen;
     },
-    
+    openFacebookPop: (state) => {
+      // Open the Facebook popup
+      state.facebookPopOpen = true;
+      // Other popups should be closed when one is opened
+      state.addProfileOpen = false;
+      state.instagramPopOpen = false;
+      state.tikTokPopOpen = false;
+      state.linkedInPopOpen = false;
+      state.pinterestPopOpen = false;
+      state.xPopOpen = false;
+    },
+    closeFacebookPop: (state) => {
+      state.facebookPopOpen = false;  
+    },
+    openInstagramPop: (state) => {
+      // Open the Instagram popup
+      state.instagramPopOpen = true;
+      // Other popups should be closed when one is opened
+      state.addProfileOpen = false;
+      state.facebookPopOpen = false;
+      state.tikTokPopOpen = false;
+      state.linkedInPopOpen = false;
+      state.pinterestPopOpen = false;
+      state.xPopOpen = false;
+    },
+    closeInstagramPop: (state) => {
+      state.instagramPopOpen = false;  
+    }
   },
 });
 
