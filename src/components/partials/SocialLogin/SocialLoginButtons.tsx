@@ -8,7 +8,9 @@ import { Button } from '@mui/base/Button';
 import { unstable_useModal as useModal } from '@mui/base/unstable_useModal';
 import Fade from '@mui/material/Fade';
 import SingleSocialButton from './SingleSocialButton';
-import Grid from '@mui/material/Grid';
+import { RootState } from '@/redux/store'
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleAddProfile } from '@/redux/slices/topBarSlices/topBarSlice';
 
 
 const socialButtons = [
@@ -21,13 +23,13 @@ const socialButtons = [
 ]
 
 export default function SocialLoginButtons() {
-    const [open, setOpen] = React.useState(true);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const open = useSelector((state: RootState) => state.persistedReducer.appTopBar.addProfileOpen);
+    const dispatch = useDispatch()
+    const handleClose = () => dispatch(toggleAddProfile());
 
     return (
         <div>
-            <TriggerButton onClick={handleOpen}>Open modal</TriggerButton>
+            {/* <TriggerButton onClick={handleOpen}>Open modal</TriggerButton> */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
