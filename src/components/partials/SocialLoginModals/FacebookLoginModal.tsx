@@ -7,22 +7,12 @@ import { FocusTrap } from '@mui/base/FocusTrap';
 import { Button } from '@mui/base/Button';
 import { unstable_useModal as useModal } from '@mui/base/unstable_useModal';
 import Fade from '@mui/material/Fade';
-import SingleSocialButton from './SingleSocialButton';
 import { RootState } from '@/redux/store'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleAddProfile } from '@/redux/slices/layoutSlices/layoutSlice';
 
 
-const socialButtons = [
-    { name: 'Facebook', icon: '/media/icons/facebook.png', feature: "Bussiness Page" },
-    { name: 'Instragram', icon: '/media/icons/instagram.png', feature: "Bussiness or Creator" },
-    { name: 'Tiktok', icon: '/media/icons/tiktok.png', feature: "Bussiness or Creator" },
-    { name: 'LinkedIn', icon: '/media/icons/linkedin.png', feature: "Page or Profile" },
-    { name: 'X', icon: '/media/icons/x.png', feature: "Profile" },
-    { name: 'Pinterest', icon: '/media/icons/pinterest.png', feature: "Bussiness or profile" },
-]
-
-export default function SocialLoginButtons() {
+export default function SocialLoginModal() {
     const open = useSelector((state: RootState) => state.persistedReducer.appTopBar.addProfileOpen);
     const dispatch = useDispatch()
     const handleClose = () => dispatch(toggleAddProfile());
@@ -40,9 +30,7 @@ export default function SocialLoginButtons() {
                 <Fade in={open}>
                     <ModalContent sx={style}>
                         <div className='grid grid-cols-3 gap-4'>
-                            {socialButtons.map((button, index) => (
-                                <SingleSocialButton {...button}/>
-                            ))}
+                            FaceBook Login Button
 
                         </div>
 

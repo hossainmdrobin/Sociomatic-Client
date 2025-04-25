@@ -3,12 +3,14 @@ import { persistStore, persistReducer ,PersistConfig} from 'redux-persist'
 import storage from "redux-persist/lib/storage";
 
 import counterReducer from './slices/counterSlice'
-import postComponentReducer from './slices/postComponentSlice'
+import postComponentReducer from './slices/postComponentSlice';
+import topBarReducer from './slices/layoutSlices/layoutSlice';
 import apiSlice  from './api/apiSlice';
 
 const rootReducer = combineReducers({
   counter:counterReducer,
   post_component: postComponentReducer,
+  appTopBar:topBarReducer,
 })
 
 const persistConfig:PersistConfig<ReturnType<typeof rootReducer>> = {

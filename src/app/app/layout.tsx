@@ -24,7 +24,6 @@ export default function AppLayout({
                 {children}
                 <CreatePost />
                 <SocialLoginButtons />
-
             </section>
         </ReduxProvider>
     );
