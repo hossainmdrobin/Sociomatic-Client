@@ -43,9 +43,7 @@ export default function SocialLoginButtons() {
                             {socialButtons.map((button, index) => (
                                 <SingleSocialButton {...button}/>
                             ))}
-
                         </div>
-
                     </ModalContent>
                 </Fade>
             </Modal>
