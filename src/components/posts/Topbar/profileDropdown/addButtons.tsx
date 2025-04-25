@@ -4,7 +4,7 @@ import React from 'react'
 import { IoMdAdd } from "react-icons/io";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
-import { toggleAddProfile } from '@/redux/slices/topBarSlices/topBarSlice';
+import { toggleAddProfile } from '@/redux/slices/layoutSlices/layoutSlice';
 
 
 
