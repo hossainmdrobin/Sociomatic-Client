@@ -11,10 +11,11 @@ import SingleSocialButton from './SingleSocialButton';
 import { RootState } from '@/redux/store'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleAddProfile } from '@/redux/slices/layoutSlices/layoutSlice';
+import { facebookLogin } from '@/firebase/auth';
 
 
 const socialButtons = [
-    { name: 'Facebook', icon: '/media/icons/facebook.png', feature: "Bussiness Page" },
+    { name: 'Facebook', icon: '/media/icons/facebook.png', feature: "Bussiness Page", func:facebookLogin },
     { name: 'Instragram', icon: '/media/icons/instagram.png', feature: "Bussiness or Creator" },
     { name: 'Tiktok', icon: '/media/icons/tiktok.png', feature: "Bussiness or Creator" },
     { name: 'LinkedIn', icon: '/media/icons/linkedin.png', feature: "Page or Profile" },
