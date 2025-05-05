@@ -2,20 +2,20 @@ import React from 'react'
 import Image from 'next/image'
 import { Button } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { openFacebookPop, openInstagramPop, openLinkedInPop, openTiktokPop, openXPop } from '@/redux/slices/layoutSlices/layoutSlice';
+// import { openFacebookPop, openInstagramPop, openLinkedInPop, openTiktokPop, openXPop } from '@/redux/slices/layoutSlices/layoutSlice';
 import { HiOutlineSparkles } from "react-icons/hi2"; // New in Heroicons v2 via react-icons
 
 export default function SingleSocialButton({ name, icon, feature, func }: { name: string, icon: string, feature: string, func?: () => void }) {
     const dispatch = useDispatch();
-    const handleClick = () => {
-        console.log(name);
-        if (name === 'Facebook') dispatch(openFacebookPop());
-        else if (name === 'Instragram') dispatch(openInstagramPop());
-        else if (name === 'Tiktok') dispatch(openTiktokPop());
-        else if (name === 'LinkedIn') dispatch(openLinkedInPop());
-        else if (name === 'X') dispatch(openXPop());
-        else if (name === 'Pinterest') dispatch(openInstagramPop());
-    }
+    // const handleClick = () => {
+    //     console.log(name);
+    //     if (name === 'Facebook') dispatch(openFacebookPop());
+    //     else if (name === 'Instragram') dispatch(openInstagramPop());
+    //     else if (name === 'Tiktok') dispatch(openTiktokPop());
+    //     else if (name === 'LinkedIn') dispatch(openLinkedInPop());
+    //     else if (name === 'X') dispatch(openXPop());
+    //     else if (name === 'Pinterest') dispatch(openInstagramPop());
+    // }
     return (
         <div className=' transition border-[1px] group relative rounded-md hover:border-[#1976d2] px-2 py-4 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-200'>
             <Image className='transition group-hover:hidden' src={icon} width={40} height={40} alt="Description of the image" />
