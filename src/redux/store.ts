@@ -6,6 +6,7 @@ import counterReducer from './slices/counterSlice'
 import postComponentReducer from './slices/postComponentSlice';
 import topBarReducer from './slices/layoutSlices/layoutSlice';
 import apiSlice  from './api/apiSlice';
+import { authApi } from './slices/authApiSlices/authApiSlice';
 
 const rootReducer = combineReducers({
   counter:counterReducer,
@@ -25,12 +26,14 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
   reducer:{
     persistedReducer,
-    [apiSlice.reducerPath]:apiSlice.reducer
+    [apiSlice.reducerPath]:apiSlice.reducer,
+    ['authApi']:authApi.reducer
   },
   middleware:(getDefaultMiddleware)=>
-    getDefaultMiddleware({
-      serializableCheck:false,
-    }),
+    getDefaultMiddleware().concat(apiSlice.middleware).concat(authApi.middleware),
+    // getDefaultMiddleware({
+    //   serializableCheck:false,
+    // }),
   devTools:process.env.NODE_ENV!="production"
 });
 

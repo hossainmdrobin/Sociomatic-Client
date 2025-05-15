@@ -6,9 +6,9 @@ import CreatePost from "@/components/posts/createPost/CreatePost";
 import Topbar from "@/components/posts/Topbar/Topbar";
 import SocialLoginButtons from "@/components/partials/SocialLogin/SocialLoginButtons";
 import FacebookLoginModal from "@/components/partials/SocialLoginModals/FacebookLoginModal";
-import { redirect, usePathname } from 'next/navigation';
+// import { redirect, usePathname } from 'next/navigation';
 
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 
 export default function AppLayout({
@@ -16,9 +16,10 @@ export default function AppLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    if (!Cookies.get('token')) {
-        redirect('/login');
-    }
+    // console.log("token is",!Cookies.get('token'));
+    // if (!Cookies.get('token')) {
+    //     // redirect('/login');
+    // }
     return (
         <ReduxProvider>
             <section>

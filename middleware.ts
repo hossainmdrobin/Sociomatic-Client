@@ -1,19 +1,40 @@
-// middleware.ts (root directory)
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-// The matcher is now defined here, not in next.config.ts
-export const config = {
-  matcher: ['/app/:path*'],  // Protect /app and all its subpaths
-};
-
-export function middleware(request: NextRequest) {
-  console.log('✅ Middleware is running:', request.nextUrl.pathname);
-
-  const isLoggedIn = false;  // Simulating that the user is not logged in
-
-  if (!isLoggedIn) {
-    return NextResponse.redirect(new URL('/login', request.url));
+import { NextRequest, NextResponse } from 'next/server'
+// import { decrypt } from '@/app/lib/session'
+import { cookies } from 'next/headers'
+ 
+// 1. Specify protected and public routes
+const protectedRoutes = ['/app']
+const publicRoutes = ['/login', '/signup', '/']
+ 
+export default async function middleware(req: NextRequest) {
+  // 2. Check if the current route is protected or public
+  const path = req.nextUrl.pathname
+  const isProtectedRoute = protectedRoutes.includes(path)
+  const isPublicRoute = publicRoutes.includes(path)
+ 
+  // 3. Decrypt the session from the cookie
+  const cookie = (await cookies()).get('token')?.value
+  // const session = await decrypt(cookie)
+  console.log('session', cookie)
+ 
+  // 4. Redirect to /login if the user is not authenticated
+  if (isProtectedRoute && !cookie) {
+    return NextResponse.redirect(new URL('/login', req.nextUrl))
   }
-
-  return NextResponse.next();
+ 
+  // 5. Redirect to /dashboard if the user is authenticated
+  if (
+    isPublicRoute &&
+    cookie &&
+    !req.nextUrl.pathname.startsWith('/app')
+  ) {
+    return NextResponse.redirect(new URL('/app', req.nextUrl))
+  }
+ 
+  return NextResponse.next()
+}
+ 
+// Routes Middleware should not run on
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 }

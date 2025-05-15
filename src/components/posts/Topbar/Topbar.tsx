@@ -3,10 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import ProfileDropdown from './profileDropdown/profileDropdown';
+import { useGetUserInfoQuery } from '@/redux/slices/authApiSlices/authApiSlice';
 
 
 export default function Topbar() {
   const [openDropdown, setOpenDropdown] = useState(false)
+  const { data,isLoading,error } = useGetUserInfoQuery()
+  console.log("user-info",data);
   return (
     <div className='py-2 pl-4 shadow-md flex items-center bg-white justify-between'>
       <div>
