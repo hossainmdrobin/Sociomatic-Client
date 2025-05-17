@@ -6,7 +6,7 @@ const token = cookies.get('token');
 console.log(getBaseUrl(), "base-url");
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: getBaseUrl() }),
   endpoints: (builder) => ({
     getUserInfo: builder.query<any[], void>({
       query: () => ({
