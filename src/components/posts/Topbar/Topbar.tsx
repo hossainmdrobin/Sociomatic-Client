@@ -20,12 +20,13 @@ export default function Topbar() {
   const { data, isLoading, error } = useGetUserInfoQuery()
   const activeAccount = useSelector((state: RootState) => state.persistedReducer.accounts.activeAccount)
   const dispatch = useDispatch();
+  console.log(activeAccount,data, "activeAccount");
 
   useEffect(() => {
     if (data) {
-      dispatch(setAllAccounts(data.accounts));
-      const accountIds: string[] = data.accounts.map((item: Account) => item._id)
-      if(!activeAccount || !accountIds.includes(activeAccount._id)) dispatch(setActiveAccount(data.accounts[0]));
+      dispatch(setAllAccounts(data.data.accounts));
+      const accountIds: string[] = data.data.accounts.map((item: Account) => item._id)
+      if(!activeAccount || !accountIds.includes(activeAccount._id)) dispatch(setActiveAccount(data.data.accounts[0]));
     }
   }, [data])
   return (
@@ -38,7 +39,7 @@ export default function Topbar() {
             className="flex items-center text-gray-600 hover:text-black transition -z-10"
             onClick={() => setOpenDropdown(!openDropdown)}
           >
-            Profile Selected <ChevronDown className="ml-1 w-4 h-4" />
+            {activeAccount?.name} <ChevronDown className="ml-1 w-4 h-4" />
           </button>
 
           <AnimatePresence>
