@@ -7,6 +7,7 @@ import { useGetUserInfoQuery } from '@/redux/slices/authApiSlices/authApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { setActiveAccount, setAllAccounts } from '@/redux/slices/accountsSlices/accountSlice';
+import Image from 'next/image';
 
 // Define Account type if not imported from elsewhere
 type Account = {
@@ -30,16 +31,17 @@ export default function Topbar() {
     }
   }, [data])
   return (
-    <div className='py-2 pl-4 shadow-md flex items-center bg-white justify-between'>
+    <div className='fixed z-10 top-0 left-0 right-0 py-3 pl-14 shadow-md flex items-center bg-white justify-between'>
       <div>
         <div
           className="relative"
         >
           <button
-            className="flex items-center text-gray-600 hover:text-black transition -z-10"
+            className="flex items-center text-gray-600 hover:text-black transition"
             onClick={() => setOpenDropdown(!openDropdown)}
           >
-            {activeAccount?.name} <ChevronDown className="ml-1 w-4 h-4" />
+            <Image src={activeAccount?.photo || ""} width={25}  height={30} alt='image' />
+             <span className='text-sm ml-2'>{activeAccount?.name}</span> <ChevronDown className="ml-1 w-4 h-4" />
           </button>
 
           <AnimatePresence>
@@ -49,7 +51,7 @@ export default function Topbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-8 left-0 mt-2 w-[600px] bg-white shadow-lg rounded-lg overflow-hidden z-50"
+                className="absolute top-8 left-0 mt-2 w-[600px] bg-white shadow-lg rounded-lg overflow-hidden z-10"
               >
                 <ProfileDropdown />
               </motion.div>

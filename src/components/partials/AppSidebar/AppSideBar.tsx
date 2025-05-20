@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default function AppSideBar() {
   return (
     <div className=''>
-      <div className='h-screen py-4 bg-indigo-500 w-[40px] fixed flex flex-col justify-between items-center '>
+      <div className='h-screen py-4 bg-indigo-500 w-[40px] fixed flex flex-col justify-between items-center z-50 '>
         <div>
           <div><MdAutoGraph className='text-3xl text-white' /></div>
           <div className='group ml-[2px] hover:bg-cyan-400 cursor-pointer rounded-s py-3 px-2 w-[38px]'>

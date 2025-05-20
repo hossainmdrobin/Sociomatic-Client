@@ -23,7 +23,7 @@ const IconButton: React.FC<IconButtonProps> = ({ icon: Icon }) => {
 
 export default function Dropdown({ title, tabs }: props) {
   return (
-    <div className='fixed left-[40px] text-white top-0 pl-2 h-screen w-[200px] bg-cyan-400 shadow-xl'>
+    <div className='fixed z-50 left-[40px] text-white top-0 pl-2 h-screen w-[200px] bg-cyan-400 shadow-xl'>
       <h3 className='font-bold mt-4 mb-1'>{title}</h3>
       <hr />
       {
