@@ -42,7 +42,7 @@ export default function SocialLoginButtons() {
                     <ModalContent sx={style}>
                         <div className='grid grid-cols-3 gap-4'>
                             {socialButtons.map((button, index) => (
-                                <SingleSocialButton {...button}/>
+                                <SingleSocialButton key={button.name} {...button}/>
                             ))}
                         </div>
                     </ModalContent>

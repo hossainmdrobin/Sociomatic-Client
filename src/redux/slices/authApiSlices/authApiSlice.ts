@@ -1,13 +1,24 @@
+import { getBaseUrl } from '@/getenv/getEnv';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import cookies from 'js-cookie'
 
+const token = cookies.get('token');
+console.log(getBaseUrl(), "base-url");
 export const authApi = createApi({
-  reducerPath: 'postApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
+  reducerPath: 'authApi',
+  baseQuery: fetchBaseQuery({ baseUrl: getBaseUrl() }),
   endpoints: (builder) => ({
-    getPosts: builder.query<any[], void>({
-      query: () => 'posts',
+    getUserInfo: builder.query<any, void>({
+      query: () => ({
+        url: '/auth/get-user-info',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }),
     }),
   }),
 });
 
-export const { useGetPostsQuery } = authApi;
+export const { useGetUserInfoQuery } = authApi;

@@ -5,7 +5,8 @@ import ReduxProvider from "@/redux/provider";
 import CreatePost from "@/components/posts/createPost/CreatePost";
 import Topbar from "@/components/posts/Topbar/Topbar";
 import SocialLoginButtons from "@/components/partials/SocialLogin/SocialLoginButtons";
-import FacebookLoginModal from "@/components/partials/SocialLoginModals/FacebookLoginModal";
+// import Loader from "@/components/partials/Loader";
+
 
 export default function AppLayout({
     children,
@@ -24,7 +25,7 @@ export default function AppLayout({
                 {children}
                 <CreatePost />
                 <SocialLoginButtons />
-                <FacebookLoginModal />
+                {/* <Loader /> */}
             </section>
         </ReduxProvider>
     );

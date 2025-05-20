@@ -7,12 +7,18 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Loader from "@/components/partials/Loader";
 import { redirect } from "next/navigation";
+import Cookies from 'js-cookie';
+import Link from "next/link";
 
 type FormData = {
   name: string;
   email: string;
   password: string;
 };
+function setTimeout(callback: () => void, delay: number): NodeJS.Timeout {
+  return global.setTimeout(callback, delay);
+}
+
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<boolean>(false);
@@ -28,25 +34,24 @@ export default function Login() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL_DEV}/auth/login`, {
       method: "POST",
       body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json", },
+      headers: { "Content-Type": "application/json" },
     });
     setLoading(false);
 
-    if (response.ok) {
-      toast.success("Login successful!");
-      setData(true)
-      response.json().then((res) => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+    response.json().then((res) => {
+      console.log(res)
+      if (res.success) {
+        console.log("Login response:", res);
+        Cookies.set("token", res.data.token, { expires: 7 });
         setTimeout(() => {
-          redirect('/app/posts');
+          redirect("/app/posts");
         }, 500);
+      }
 
-      })
-    }
-    else {
-      setError(true);
-    }
+    });
+    // } else {
+    //   setError(true);
+    // }
   };
 
   return (
@@ -94,9 +99,11 @@ export default function Login() {
               <FaXTwitter size={24} />
             </button>
           </div>
+          <div className="text-gray-500 mt-3">Don't have an account ? <span className="underline text-blue-400"><Link href={'/signup'}>Create one</Link></span></div>
         </div>
       </div>
-      <Toaster position="bottom-left"/>
+      <Toaster position="bottom-left" />
     </>
   );
 }
+
