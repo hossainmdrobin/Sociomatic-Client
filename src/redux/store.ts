@@ -2,9 +2,13 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer ,PersistConfig} from 'redux-persist'
 import storage from "redux-persist/lib/storage";
 
+// Reducers
 import counterReducer from './slices/counterSlice'
 import postComponentReducer from './slices/postComponentSlice';
 import topBarReducer from './slices/layoutSlices/layoutSlice';
+import accountReducer from "./slices/accountsSlices/accountSlice";
+
+// api
 import apiSlice  from './api/apiSlice';
 import { authApi } from './slices/authApiSlices/authApiSlice';
 
@@ -12,13 +16,14 @@ const rootReducer = combineReducers({
   counter:counterReducer,
   post_component: postComponentReducer,
   appTopBar:topBarReducer,
+  accounts:accountReducer
 })
 
 const persistConfig:PersistConfig<ReturnType<typeof rootReducer>> = {
   key:'root',
   version: 1,
   storage,
-  whitelist:[]
+  whitelist:["accounts"]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -8,7 +8,7 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({ baseUrl: getBaseUrl() }),
   endpoints: (builder) => ({
-    getUserInfo: builder.query<any[], void>({
+    getUserInfo: builder.query<any, void>({
       query: () => ({
         url: '/auth/get-user-info',
         method: 'GET',

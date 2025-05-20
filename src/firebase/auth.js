@@ -6,8 +6,9 @@ export const signInWithGoogle = async () => {
   const result = await signInWithPopup(auth, provider);
   return result;
 }
-export const facebookLogin = () => {
+export const facebookLogin = (setData) => {
   const provider = new FacebookAuthProvider()
+  let data = null;
   signInWithPopup(auth, provider)
     .then((result) => {
       // The signed-in user info.
@@ -19,7 +20,7 @@ export const facebookLogin = () => {
       // console.log("credential:", credential);
       // console.log(accessToken);
 
-      return {
+      data =  {
         socialId: user.providerData[0]?.uid,
         name: user.displayName,
         email: user.email,
@@ -27,6 +28,8 @@ export const facebookLogin = () => {
         photo: user.photoURL,
         accountType: "facebook",
       }
+      setData(data);
+      localStorage.setItem("account_data", JSON.stringify(data));
     })
     .catch((error) => {
       // Handle Errors here.
@@ -37,8 +40,10 @@ export const facebookLogin = () => {
       // The AuthCredential type that was used.
       const credential = FacebookAuthProvider.credentialFromError(error);
       console.log("error:", error);
-      return error
+      data = error;
       // ...
+      localStorage.setItem("account_error", JSON.stringify(data));
     });
+    return data
 
 }

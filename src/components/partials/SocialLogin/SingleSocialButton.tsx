@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '@mui/material'
 // import { openFacebookPop, openInstagramPop, openLinkedInPop, openTiktokPop, openXPop } from '@/redux/slices/layoutSlices/layoutSlice';
 import { HiOutlineSparkles } from "react-icons/hi2"; // New in Heroicons v2 via react-icons
 import { useAddAccountMutation } from '@/redux/slices/accountsSlices/accountApiSlice';
 
-export default function SingleSocialButton({ name, icon, feature, func }: { name: string, icon: string, feature: string, func?: () => any }) {
-    const [addAccount,{data:accountData,isLoading,error}] = useAddAccountMutation();
-    const callAddAccountApi = async () =>{
-        if (func) {
-            console.log("Calling add account api")
-            const data = await func();
-            console.log("here",data)
-            if(data){
-                addAccount(data);
-            }
-        }
-    }
-    
+export default function SingleSocialButton({ name, icon, feature, func }: { name: string, icon: string, feature: string, func?: (item:any) => any }) {
+    const [addAccount,{data:res_acccountData,isLoading,error}] = useAddAccountMutation();
+    const [accountData, setAccountData] = useState<any>(null);
+    // const callAddAccountApi = async () =>{
+    //     if (func) {
+    //         console.log("Calling add account api")
+    //         const data = func();
+    //         console.log("here",data)
+    //         if(data){
+    //             addAccount(data);
+    //         }
+    //     }
+    // }
+
+    useEffect(() => {
+        if(accountData) addAccount(accountData);
+    }, [accountData])
+
     useEffect(()=>{
 
         
@@ -29,7 +34,7 @@ export default function SingleSocialButton({ name, icon, feature, func }: { name
             <p className='transition group-hover:hidden font-bold py-2'>{name}</p>
             <p className='transition group-hover:hidden text-xs text-gray-600 text-center'>{feature}</p>
             <div className='transition absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:block hidden flex justify-center'>
-                {func && <Button onClick={callAddAccountApi} variant='contained' size="small">Connect</Button>}
+                {func && <Button onClick={()=>func(setAccountData)} variant='contained' size="small">Connect</Button>}
                 {!func && <button
                     className="w-full h-full inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-gray-800 text-sm font-medium shadow-sm hover:bg-gray-100 hover:scale-105 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-60 disabled:cursor-not-allowed"
                     disabled

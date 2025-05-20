@@ -1,15 +1,33 @@
 "use client"
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProfileDropdown from './profileDropdown/profileDropdown';
 import { useGetUserInfoQuery } from '@/redux/slices/authApiSlices/authApiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { setActiveAccount, setAllAccounts } from '@/redux/slices/accountsSlices/accountSlice';
+
+// Define Account type if not imported from elsewhere
+type Account = {
+  _id: string;
+  // add other properties if needed
+};
 
 
 export default function Topbar() {
   const [openDropdown, setOpenDropdown] = useState(false)
-  const { data,isLoading,error } = useGetUserInfoQuery()
-  console.log("user-info",data);
+  const { data, isLoading, error } = useGetUserInfoQuery()
+  const activeAccount = useSelector((state: RootState) => state.persistedReducer.accounts.activeAccount)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setAllAccounts(data.accounts));
+      const accountIds: string[] = data.accounts.map((item: Account) => item._id)
+      if(!activeAccount || !accountIds.includes(activeAccount._id)) dispatch(setActiveAccount(data.accounts[0]));
+    }
+  }, [data])
   return (
     <div className='py-2 pl-4 shadow-md flex items-center bg-white justify-between'>
       <div>
