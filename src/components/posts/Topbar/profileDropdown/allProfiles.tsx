@@ -1,79 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Avatar,
   List,
   ListItem,
   ListItemText,
-  Typography,
+  // Typography,
   Paper,
   Radio,
   FormControl,
-  Box
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { setActiveAccount } from '@/redux/slices/accountsSlices/accountSlice';
 
-const profiles = [
-  {
-    name: 'Alice Johnson',
-    title: 'Product Manager',
-    image: 'https://randomuser.me/api/portraits/women/1.jpg',
-    id: 'alice',
-  },
-  {
-    name: 'Bob Smith',
-    title: 'Frontend Developer',
-    image: 'https://randomuser.me/api/portraits/men/2.jpg',
-    id: 'bob',
-  },
-  {
-    name: 'Carol Lee',
-    title: 'UX Designer',
-    image: 'https://randomuser.me/api/portraits/women/3.jpg',
-    id: 'carol',
-  },
-];
+
 
 const ProfileListWithRadioStart = () => {
-  const [selectedProfile, setSelectedProfile] = useState('');
-
-interface Profile {
-    name: string;
-    title: string;
-    image: string;
-    id: string;
-}
-
-const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSelectedProfile(event.target.value);
-};
+  const accountData = useSelector((state: RootState) => state.persistedReducer.accounts);
+  const dispatch = useDispatch();
 
   return (
-    <Paper elevation={3} sx={{ maxWidth: 400,width:400,boxShadow:0, margin: '0px', p: 0 }}>
-      <Typography variant="h6" gutterBottom>
+    <Paper elevation={3} sx={{ maxWidth: 400, width: 400, boxShadow: 0, margin: '0px', p: 0 }}>
+      {/* <Typography variant="h6" gutterBottom>
         Select a Team Member
-      </Typography>
+      </Typography> */}
       <FormControl component="fieldset">
         <List>
-          {profiles.map((profile) => (
+          {accountData?.accounts?.map((profile) => (
             <ListItem
-              key={profile.id}
+              key={profile._id}
               disableGutters
               sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-              onClick={() => setSelectedProfile(profile.id)}
+              onClick={() => dispatch(setActiveAccount(profile))}
               component="div"
             >
               <Radio
-                checked={selectedProfile === profile.id}
-                onChange={handleChange}
-                value={profile.id}
+                checked={accountData?.activeAccount?._id === profile._id}
               />
               <Avatar
                 alt={profile.name}
-                src={profile.image}
+                src={profile.photo}
                 sx={{ mx: 2 }}
               />
               <ListItemText
-                primary={profile.name}
-                secondary={profile.title}
+                primary={profile?.name}
+                secondary={profile?.accountType}
               />
             </ListItem>
           ))}
