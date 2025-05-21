@@ -11,7 +11,7 @@ export default function CreatePost() {
     const show = useSelector((state: RootState) => state.persistedReducer.post_component.showPostForm)
     const [isPC, setIsPC] = useState(true)
     return (
-        <div className={`fixed top-0 left-0 rounded-end-xl h-screen bg-gray-100 w-[calc(theme(width.screen)-100px)] shadow-xl ${show ? "" : 'hidden'}`}>
+        <div className={`fixed top-16 left-12 bottom-3 right-3 rounded-end-xl bg-gray-200 rounded-xl shadow-xl ${show ? "" : 'hidden'}`}>
             <div className=''>
                 <div className='w-full'>
                     <PostFormHeader />
@@ -26,7 +26,6 @@ export default function CreatePost() {
                         <PostForm />
                     </div>
                 </div>
-
             </div>
         </div>
     )
